@@ -5,8 +5,10 @@ $(function() {
   // <li> tags
   function taskHtml(task) {
     var checkedStatus = task.done ? "checked" : "";
-    var liElement = '<li><div class="view"><input class="toggle" type="checkbox"' +
-      " data-id='" + task.id + "'" + checkedStatus + ' /><label>' +
+    var liClass = task.done ? "completed" : "";
+    var liElement = '<li id="listItem-' + task.id + '" class="' + liClass + '">' +
+      '<div class="view"><input class="toggle" type="checkbox"' +
+      " data-id='" + task.id + "'" + checkedStatus + '><label>' +
       task.title + '</label></div></li>';
     return liElement;
   }
@@ -25,7 +27,13 @@ $(function() {
       task: {
         done: doneValue // This will be repeated with rowOrder: newIndex
       }
-    });
+    }).success(function(data) {
+      var liHtml = taskHtml(data); // convert JS representation into HTML rep'n
+      var $li = $("#listItem-" + data.id); // extract HTML element from page with jQuery
+      $li.replaceWith(liHtml); // replace original HTML with newly-generated HTML
+      $('.toggle').change(toggleTask); /* New item on page AFTER setup of click handler
+      means click handler must be re-registered to toggle the items */
+    } );
   }
 
   jQuery.get("/tasks").success( function(data) {
