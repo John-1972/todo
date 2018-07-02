@@ -15,18 +15,6 @@
 
 <script type="text/javascript">
   $(function() {
-    $('#new-form').submit(function(event) {
-      event.preventDefault();
-      var textbox = $('.new-todo');
-      var payload = {
-        task: {
-          title: textbox.val()
-        }
-      };
-      $.post("/tasks", payload).success(function(data) {
-        console.log("Successful HTTP Request");
-      });
-    });
 
     // The taskHtml method takes in a JavaScript representation
     // of the task and produces an HTML representation using
@@ -67,8 +55,24 @@
 
       jQuery('.toggle').change(toggleTask);
 
-
       jQuery('.todo-list').sortable({});
     });
+
+    $('#new-form').submit(function(event) {
+      event.preventDefault();
+      var textbox = $('.new-todo');
+      var payload = {
+        task: {
+          title: textbox.val()
+        }
+      };
+      $.post("/tasks", payload).success(function(data) {
+        var htmlString = taskHtml(data); // convert JS representation of task into HTML rep'n
+        var ulTodos = $('.todo-list'); // jQuery extracts item from page...
+        ulTodos.append(htmlString); // ...and then appends item to bottom of the list
+        $('.toggle').click(toggleTask); // added click handler so checkbox clicking is recorded
+      });
+    });
+
   });
 </script>
