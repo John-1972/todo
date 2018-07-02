@@ -55,6 +55,7 @@ $(function() {
       var ulTodos = $('.todo-list'); // jQuery extracts item from page...
       ulTodos.append(htmlString); // ...and then appends item to bottom of the list
       $('.toggle').click(toggleTask); // added click handler so checkbox clicking is recorded
+      $('.new-todo').val(''); // Clears the input box after entering a task
     });
   });
 });
