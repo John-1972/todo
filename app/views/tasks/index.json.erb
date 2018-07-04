@@ -1,0 +1,5 @@
+[
+  <% @tasks.each do |task| %>
+    <%= task.to_json.html_safe %>,
+  <% end %>
+]
