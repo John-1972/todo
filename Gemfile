@@ -57,3 +57,4 @@ group :development, :test do
 end
 
 gem 'ranked-model'
+gem 'devise'
