@@ -1,16 +1,19 @@
 <section class="todoapp">
   <header class="header">
     <h1>to-dos</h1>
-    <form id="new-form">
-      <input type="text" class="new-todo" placeholder="What needs to be done?" />
-    </form>
   </header>
 
-  <section class="main">
-    <ul class="todo-list">
-
-    </ul>
-  </section>
+  
+</section>
+<section class="welcome"> <!-- Was class="main" & was inside "section" above -->
+  <p>Welcome to Todo List app!</p>
+  <p><%= link_to "Sign up", new_user_registration_path %></p>
+  <p><%= link_to "Log in", new_user_session_path %></p>
+  <!-- (The logout link will have to be on every to-do list page) -->
+  
+  <!-- Devise has already supplied its own pages for these, -->
+  <!-- localhost:3030/users/sign_up & /users/sign_in -->
+  <!-- Can I put Devise's pages into modals that pop-up over this page? -->
 </section>
 
 <section class="author">

@@ -1,23 +1,26 @@
 $(function() {
 
+
   // The taskHtml method takes in a JavaScript representation
   // of the task and produces an HTML representation using
   // <li> tags
   function addTaskHtml(task, listElement) {
-    var checkedStatus = task.done ? "checked" : "";
+    var checkedStatus = task.done ? "checked" : ""; // Either-Or
     var liClass = task.done ? "completed" : "";
-    var subTasks = task.tasks; // if task has sub-tasks, I add <ul></ul> tags
+    var subTasks = task.tasks;
     var newTaskHTML =
         '<li id="listItem-' + task.id + '" data-id="' + task.id +'" class="' + liClass + '">' +
         '<div class="view"><input class="toggle" type="checkbox"' + " data-id='" + task.id +
         "'" + checkedStatus + '><label>' + task.title + '</label></div></li>';
 
     listElement.append(newTaskHTML);
+
+    // $( ".todo-list" ).sortable({ connectWith: ".todo-list"}).disableSelection();
   
     if(subTasks && subTasks.length > 0) {
-      $("#listItem-"+task.id).append('<ul id="subList-' + task.id + '"></ul>');
+      $("#listItem-"+task.id).append('<ul class="todo-list" data-list-id="' + task.id + '" id="subList-' + task.id + '"></ul>');
 
-      jQuery.each(subTasks, function(index, subTask) { // loops through each subtask on the current task
+      jQuery.each(subTasks, function(index, subTask) { // loop thru each subtask of current task
          addTaskHtml(subTask, $("#subList-"+task.id)); 
       });
     }
@@ -31,8 +34,9 @@ $(function() {
     var itemId = jQuery(e.target).data("id");
 
     var doneValue = Boolean($(e.target).is(':checked'));
+    var baseUrl = $('.todo-list').data('base-url');
 
-    $.post("/tasks/" + itemId, {
+    $.post(baseUrl + itemId, {
       _method: "PUT",
       task: {
         done: doneValue
@@ -43,23 +47,34 @@ $(function() {
     });
   }
 
-  jQuery.get("/tasks").success( function(data) { //call success method on obj that $.get returns
+  
+  var baseUrl = $('.todo-list').data('base-url');
+  jQuery.get(baseUrl).success( function(data) { //call success method on obj that $.get returns
     var rootListElement = jQuery('.todo-list');
 
     jQuery.each(data, function(index, task) { // loops through each task in the database,
-      addTaskHtml(task, rootListElement); // converts JSON to HTML & appends to existing html string
+      addTaskHtml(task, rootListElement); // adds a task's HTML to an existing list element
     });
     
     jQuery('.toggle').change(toggleTask); // the click-handler thing
 
     jQuery('.todo-list').sortable({//implement 'sortable' on DOM element with class of todo-list
-        update: function(e, ui) { // jQuery triggers function when task is reordered (updated).
+      connectWith: '.todo-list',
+      update: function(e, ui) { // jQuery triggers function when task is reordered (updated)
                                 // ui.item is the JS representation of the task that's moved
         var itemId = ui.item.data('id');
-        $.post("/tasks/" + itemId, {
-          _method: "PUT",
-          task: {
-            row_order: ui.item.index()
+        var baseUrl = $('.todo-list').data('base-url');
+
+        var parentListId = ui.item.parent('ul').data('list-id');
+        if(parentListId === undefined) {
+          parentListId = null;
+        }
+ 
+        $.post(baseUrl + itemId, {
+           _method: "PUT",
+          task: { 
+            task_id: parentListId,
+            row_order: ui.item.index() // index within its parent list
           }
         });
       }
@@ -74,11 +89,11 @@ $(function() {
         title: textbox.val()
       }
     };
-    $.post("/tasks", payload).success(function(data) {
-      var htmlString = taskHtml(data); // convert JS representation of task into HTML repres.
-      var ulTodos = $('.todo-list'); //create reference to DOM element with class of todo-list
-      ulTodos.append(htmlString); // add HTML representation of task to bottom of todo-list
-      $('.toggle').click(toggleTask); // added click handler so checkbox clicking is recorded
+    var baseUrl = $('.todo-list').data('base-url');
+    $.post(baseUrl, payload).success(function(data) {
+      var rootListElement = jQuery('.todo-list');
+      addTaskHtml(data, rootListElement);
+     
       $('.new-todo').val(''); // Clears the input box after entering a task
     });
   });
