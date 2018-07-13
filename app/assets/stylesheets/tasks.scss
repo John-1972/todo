@@ -29,8 +29,7 @@ body {
   line-height: 1.4em;
   background: #f5f5f5;
   color: #4d4d4d;
-  min-width: 230px;
-  max-width: 550px;
+  
   margin: 0 auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -46,12 +45,38 @@ input[type="checkbox"] {
   display: none;
 }
 
+section {
+  min-width: 230px;
+  max-width: 550px;
+  margin: 0px auto 0px auto;
+}
+
 .todoapp {
   background: #fff;
-  margin: 130px 0 40px 0;
+  margin: 0px auto 40px auto;
   position: relative;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2),
               0 25px 50px 0 rgba(0, 0, 0, 0.1);
+}
+
+.todoapp li { /* My addition to the CSS */
+  list-style: none;
+  position: relative;
+  font-size: 24px;
+  border-bottom: 1px solid #ededed;
+
+  white-space: pre-line;
+  word-break: break-all;
+  padding: 15px 60px 15px 15px;
+  /* margin-left: 45px; */
+  display: block;
+  line-height: 1.2;
+  transition: color 0.4s;
+}
+
+.todoapp a { /* I added this as well */
+  text-decoration: none;
+  color: #4d4d4d;
 }
 
 .todoapp input::-webkit-input-placeholder {
@@ -72,10 +97,9 @@ input[type="checkbox"] {
   color: #e6e6e6;
 }
 
-.todoapp h1 {
-  position: absolute;
-  top: -155px;
+.header h1 {
   width: 100%;
+  display: inline-block;
   font-size: 100px;
   font-weight: 100;
   text-align: center;
@@ -385,18 +409,22 @@ html .clear-completed:active {
 .welcome {
   font-size: 32px;
   text-align: center;
-  margin-bottom: 20px;
+  margin-top: 20px; /* <-- This line makes no difference whatsoever */
+  margin-bottom: 20px; /* <-- And this only affects the gap below "Log in" */
 }
 
-.author {
+
+.links, .author {
   text-align: center;
   margin-bottom: 20px;
 }
 
-.author a {
+.links a, .author a {
   color: #b83f45;
 }
 
-.collection {
-  font-size: 20px;
+.authentication {
+  font-size: 15px;
+  text-align: center;
+  margin-bottom: 25px;
 }

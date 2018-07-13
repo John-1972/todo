@@ -1,9 +1,11 @@
-<section class="welcome">
-  <p>To-do Lists</p>
-</section>
+<header class="header">
+  <h1>All To-do Lists</h1>
+</header>
 
-<ul class="collection">
-  <% @todolists.each do |todolist| %>
-    <li><%= link_to todolist.name, todolist %></li>
-  <% end %>
-</ul>
+<section>
+  <ul class="todoapp">
+    <% @todolists.each do |todolist| %>
+      <li><%= link_to todolist.name, todolist %></li>
+    <% end %>
+  </ul>
+</section>

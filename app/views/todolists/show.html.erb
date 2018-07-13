@@ -1,26 +1,19 @@
-<section class="todoapp">
-  <header class="header">
-    <h1>to-dos</h1>
-    <form id="new-form">
-      <input type="text" class="new-todo" placeholder="What needs to be done?" />
-    </form>
-  </header>
+<header class="header">
+  <h1><%= @todolist.name %></h1>
+</header>
 
+<section class="todoapp">
+  <form id="new-form">
+      <input type="text" class="new-todo" placeholder="What needs to be done?" />
+  </form>
   <section class="main">
     <ul class="root-list todo-list" data-base-url="/todolists/<%= @todolist.id %>/tasks/">
-
     </ul>
   </section>
 </section>
 
-<section class="author">
-  <p><%= link_to "Log out", destroy_user_session_path, method: :delete %></p>
-</section>
-
-<section class="author">
-  A <%= link_to "todo-mvc", "http://todomvc.com" %>
-  application, built by
-  <%= link_to "Ken Mazaika", "http://github.com/kenmazaika" %>
+<section class="authentication">
+  <%= link_to 'Delete this list', todolist_path, method: :delete %>
 </section>
 
 <%= javascript_include_tag 'tasks' %>

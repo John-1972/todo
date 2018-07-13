@@ -1,0 +1,10 @@
+<header class="header">
+  <h1>Create a new list</h1>
+</header>
+
+<section class="authentication">
+  <%= simple_form_for @todolist do |f| %>
+    <%= f.input :name %>
+    <%= f.submit 'Create' %>
+  <% end %>
+</section>
