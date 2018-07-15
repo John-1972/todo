@@ -13,7 +13,7 @@
 </section>
 
 <section class="authentication">
-  <%= link_to 'Delete this list', todolist_path, method: :delete %>
+  <%= link_to 'Delete this list', todolist_path(@todolist), method: :delete %>
 </section>
 
 <%= javascript_include_tag 'tasks' %>

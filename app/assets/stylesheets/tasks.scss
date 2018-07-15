@@ -67,14 +67,17 @@ section {
 
   white-space: pre-line;
   word-break: break-all;
-  padding: 15px 60px 15px 15px;
   /* margin-left: 45px; */
   display: block;
   line-height: 1.2;
   transition: color 0.4s;
 }
 
-.todoapp a { /* I added this as well */
+.todoapp #listindex {
+  padding: 15px 60px 15px 15px; /* <-- THIS LINE is the culprit */
+}
+
+.todoapp a { /* I added this class as well */
   text-decoration: none;
   color: #4d4d4d;
 }

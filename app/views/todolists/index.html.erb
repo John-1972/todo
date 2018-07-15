@@ -3,7 +3,7 @@
 </header>
 
 <section>
-  <ul class="todoapp">
+  <ul class="todoapp" id="listindex">
     <% @todolists.each do |todolist| %>
       <li><%= link_to todolist.name, todolist %></li>
     <% end %>
