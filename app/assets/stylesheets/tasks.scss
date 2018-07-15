@@ -73,7 +73,11 @@ section {
   transition: color 0.4s;
 }
 
-.todoapp #listindex {
+#listindex {
+  padding: 0px;
+}
+
+#listindex li {
   padding: 15px 60px 15px 15px; /* <-- THIS LINE is the culprit */
 }
 
