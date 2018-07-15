@@ -9,7 +9,7 @@ $(function() {
     var liClass = task.done ? "completed" : "";
     var subTasks = task.tasks;
     var newTaskHTML =
-        '<li id="listItem-' + task.id + '" data-id="' + task.id +'" class="' + liClass + '">' +
+        '<li id="listItem-' + task.id + '" data-id="' + task.id +'" data-row-order="' + task.row_order + '" class="' + liClass + '">' +
         '<div class="view"><input class="toggle" type="checkbox"' + " data-id='" + task.id +
         "'" + checkedStatus + '><label>' + task.title + '</label></div></li>';
 
@@ -64,6 +64,13 @@ $(function() {
                                 // ui.item is the JS representation of the task that's moved
         var itemId = ui.item.data('id');
         var baseUrl = $('.todo-list').data('base-url');
+    
+        var newOrder = 0;
+        var itemAboveOrder = ui.item.prev().data('row-order');
+       
+        if(itemAboveOrder != undefined) {
+          newOrder = itemAboveOrder + 1;
+        }
 
         var parentListId = ui.item.parent('ul').data('list-id');
         if(parentListId === undefined) {
@@ -74,7 +81,7 @@ $(function() {
            _method: "PUT",
           task: { 
             task_id: parentListId,
-            row_order: ui.item.index() // index within its parent list
+            row_order: newOrder
           }
         });
       }
