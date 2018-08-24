@@ -78,7 +78,7 @@ section {
 }
 
 #listindex li {
-  padding: 15px 60px 15px 15px; /* <-- THIS LINE is the culprit */
+  padding: 15px 60px 15px 15px;
 }
 
 .todoapp a { /* I added this class as well */

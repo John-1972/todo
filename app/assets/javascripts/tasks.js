@@ -9,7 +9,8 @@ $(function() {
     var liClass = task.done ? "completed" : "";
     var subTasks = task.tasks;
     var newTaskHTML =
-        '<li id="listItem-' + task.id + '" data-id="' + task.id +'" data-row-order="' + task.row_order + '" class="' + liClass + '">' +
+        '<li id="listItem-' + task.id + '" data-id="' + task.id +
+        '" data-row-order="' + task.row_order + '" class="' + liClass + '">' +
         '<div class="view"><input class="toggle" type="checkbox"' + " data-id='" + task.id +
         "'" + checkedStatus + '><label>' + task.title + '</label></div></li>';
 
