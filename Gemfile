@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.3.4'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -7,7 +8,7 @@ end
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '5.0.7.2'
+gem 'rails', '5.0.7.2' # Was '~> 5.0.7.1'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
@@ -57,6 +58,6 @@ group :development, :test do
 end
 
 gem 'ranked-model'
-gem 'devise', '>= 4.6.0'
+gem 'devise', '>= 4.6.0' # Version was undefined
 
 gem 'simple_form'
