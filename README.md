@@ -1,24 +1,7 @@
-# README
+# To-Do Single Page Application
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The final student exercise on my bootcamp course was a single-page to-do app, featuring a fluid UI that - by using JavaScript - allowed users to rapidly add dynamic content.
 
-Things you may want to cover:
+This became the basis of my student-mentor project, adding individual user authentication, multiple to-do lists & the ability for list items to be re-ordered.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+A demo of the site can be seen here: http://todo-john-henderson.herokuapp.com/
