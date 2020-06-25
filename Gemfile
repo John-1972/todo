@@ -57,6 +57,7 @@ group :development, :test do
   gem 'factory_bot_rails'
 end
 
+gem 'rack', '~> 2.2', '>= 2.2.3'
 gem 'ranked-model'
 gem 'devise', '>= 4.6.0' # Version was undefined
 
